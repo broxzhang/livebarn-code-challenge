@@ -1,0 +1,32 @@
+.server-list-container {
+    height: 87vh;
+}
+
+.table-data {
+    display: flex;
+    flex-flow: column;
+    width: inherit;
+
+}
+
+.table-row {
+    display: flex;
+    flex-flow: row;
+    height: 2rem;
+    border-bottom: black 1px solid;
+}
+
+.table-cell {
+    display: flex;
+    flex: 1;
+}
+.custom-select {
+    background-color: cornflowerblue;
+}
+
+.surfaces-container {
+    background-color: black;
+    display: flex;
+    flex-flow: column;
+    color: white;
+}

@@ -20,13 +20,6 @@ const StyledTableCell = withStyles((theme) => ({
     fontSize: 14,
   },
 }))(TableCell);
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-  },
-}))(TableRow);
 
 export default class SurfaceList extends Component {
   constructor(props) {
@@ -38,6 +31,7 @@ export default class SurfaceList extends Component {
     };
   }
   handleOnClick = (surface) => {
+    console.log(surface);
     this.props.onSelectUpdate(surface);
     this.setState({ selectedSurface: surface.id });
   };

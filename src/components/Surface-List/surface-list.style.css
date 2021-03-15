@@ -1,0 +1,18 @@
+.surfaces-row:hover {
+    background-color: aqua;
+}
+.activeClass {
+    background-color: aqua;
+}
+
+.table-container {
+    height: 88vh;
+}
+.count-container {
+    position: fixed;
+    display: flex;
+    bottom: 0;
+    width: inherit;
+    text-align: center;
+    background-color: #FFFFFF;
+}

@@ -1,10 +1,14 @@
 import React from "react";
+import "./surface-detail.style.css";
+
 export const SurfaceDetail = (props) => {
   const { selectedSurface } = props;
   if (selectedSurface) {
     return (
-      <div>
-        <h1>Detail</h1>
+      <div className="details-container">
+        <h1>
+          <span>Detail</span>
+        </h1>
         <hr />
         <span>Venue Name:</span>
         <span>{props.selectedSurface.venueName}</span>

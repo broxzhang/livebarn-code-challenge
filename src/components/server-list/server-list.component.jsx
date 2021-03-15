@@ -43,7 +43,7 @@ export const ServerList = (props) => {
           </TableHead>
           <TableBody>
             {Object.keys(servers).map((obj) => (
-              <StyledTableRow>
+              <StyledTableRow key={obj}>
                 <StyledTableCell component="th" scope="row">
                   {servers[obj][0].server.ip4}
                 </StyledTableCell>

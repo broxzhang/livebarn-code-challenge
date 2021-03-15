@@ -1,8 +1,5 @@
 import "./App.css";
-// import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import React, { Component } from "react";
-// import DataFilter from "./components/DataFilter";
 import { AppBar, Tab, TextField } from "@material-ui/core";
 import Tabs from "@material-ui/core/Tabs";
 import SurfaceList from "./components/Surface-List/Surface-list.component";
@@ -17,6 +14,7 @@ class App extends Component {
       surfaces: [],
       selectedSur: undefined,
       searchFilter: "",
+      showingData: false,
     };
   }
 
@@ -46,42 +44,58 @@ class App extends Component {
     return (
       <div className="App">
         <div className="button-session">
-          <Button variant="contained" color="primary">
-            Empty Tab
-          </Button>
-          <Button variant="contained" color="secondary">
-            Data
-          </Button>
-        </div>
-        <div className="data-display">
-          <div className="search-container">
-            <TextField
-              type="text"
-              placeholder="Search for..."
-              onChange={(event) =>
-                this.setState({ searchFilter: event.target.value })
-              }
-            />
-            <AppBar position="static">
-              <Tabs value={this.state.value} onChange={handleChange}>
-                <Tab label="Surfaces" />
-                <Tab label="Severs" />
-              </Tabs>
-            </AppBar>
-            {this.state.value === 0 ? (
-              <SurfaceList
-                surfaces={FilteredSurfaces}
-                onSelectUpdate={updateSelectedSur}
-                selectSurface={this.state.selectedSur}
-              />
-            ) : (
-              <ServerList surfaces={this.state.surfaces} />
-            )}
+          <div
+            className="button"
+            onClick={() => this.setState({ showingData: false })}
+          >
+            <span className="button-text">Empty Tab</span>
+          </div>
+          <div
+            className="button"
+            onClick={() => this.setState({ showingData: true })}
+          >
+            <span className="button-text">Data</span>
           </div>
         </div>
-        <div className="data-detail">
-          <SurfaceDetail selectedSurface={this.state.selectedSur} />
-        </div>
+        {this.state.showingData ? (
+          <div className="data-container">
+            <div className="data-display">
+              <div className="search-container">
+                <TextField
+                  type="text"
+                  placeholder="Search for..."
+                  onChange={(event) =>
+                    this.setState({ searchFilter: event.target.value })
+                  }
+                />
+                <AppBar position="static">
+                  <Tabs value={this.state.value} onChange={handleChange}>
+                    <Tab label="Surfaces" />
+                    <Tab label="Severs" />
+                  </Tabs>
+                </AppBar>
+                {this.state.value === 0 ? (
+                  <SurfaceList
+                    surfaces={FilteredSurfaces}
+                    onSelectUpdate={updateSelectedSur}
+                    selectSurface={this.state.selectedSur}
+                  />
+                ) : (
+                  <ServerList surfaces={this.state.surfaces} />
+                )}
+              </div>
+            </div>
+            <div className="data-detail">
+              <SurfaceDetail selectedSurface={this.state.selectedSur} />
+            </div>
+          </div>
+        ) : (
+          <div className="NoData">
+            <div>
+              <h1>This is an empty tab</h1>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

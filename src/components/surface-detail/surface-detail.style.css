@@ -1,0 +1,10 @@
+span {
+    display: block;
+    margin-left: 2rem;
+}
+
+.details-container {
+    background-color: blue;
+    height: 100vh;
+    color: white;
+}

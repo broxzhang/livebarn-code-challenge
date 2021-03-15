@@ -5,11 +5,40 @@
   height: 100vh;
 }
 
+.button {
+  display: flex;
+  width: 60%;
+  height: 3rem;
+  border-radius: 10px;
+  background-color: blue;
+  color: white;
+  font-weight: bolder;
+  margin-left: 3rem;
+  text-align: center;
+  margin-top:1rem;
+}
+.button-text {
+  display: flex;
+  margin: auto;
+}
+
+.button:hover {
+  background-color: red;
+  color: white;
+}
+.button:active {
+  background-color: red;
+  color: white;
+}
+
+
 .button-session {
   display: flex;
   flex-flow: column;
   flex: 1;
+  border-right: black 5px solid;
 }
+
 
 .data-display {
   display: flex;
@@ -22,4 +51,17 @@
   display: flex;
   flex-flow: column;
   flex: 1;
+}
+
+.data-container {
+  display: flex;
+  flex-flow: row;
+  flex: 4
+}
+
+.NoData {
+  display: flex;
+  flex-flow: row;
+  flex: 4;
+  justify-content: center;
 }

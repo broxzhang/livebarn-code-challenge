@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Table from "@material-ui/core/Table";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -33,13 +33,15 @@ export default class SurfaceList extends Component {
     super(props);
     this.state = {
       active: false,
+      chosen: false,
+      selectedSurfaceId: 0,
     };
   }
   handleOnClick = (surface) => {
     this.props.onSelectUpdate(surface);
-    const currentState = this.state.active;
-    this.setState({ active: !currentState });
+    this.setState({ selectedSurface: surface.id });
   };
+
   render() {
     return (
       <div>
@@ -55,8 +57,8 @@ export default class SurfaceList extends Component {
             </TableHead>
             <TableBody>
               {this.props.surfaces.map((surface) => (
-                <StyledTableRow
-                  className="surfaces-row"
+                <TableRow
+                  selected={this.state.selectedSurface === surface.id}
                   key={surface.id}
                   onClick={() => this.handleOnClick(surface)}
                 >
@@ -72,7 +74,7 @@ export default class SurfaceList extends Component {
                   <StyledTableCell align="right">
                     {surface.sport}
                   </StyledTableCell>
-                </StyledTableRow>
+                </TableRow>
               ))}
             </TableBody>
           </Table>

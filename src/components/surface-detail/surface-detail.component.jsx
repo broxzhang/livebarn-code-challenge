@@ -1,9 +1,9 @@
 import React from "react";
 import "./surface-detail.style.css";
-
+import _ from "lodash";
 export const SurfaceDetail = (props) => {
   const { selectedSurface } = props;
-  if (selectedSurface) {
+  if (!_.isEmpty(selectedSurface)) {
     return (
       <div className="details-container">
         <h1>

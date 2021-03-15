@@ -4,7 +4,7 @@ import { AppBar, Tab, TextField } from "@material-ui/core";
 import Tabs from "@material-ui/core/Tabs";
 import SurfaceList from "./components/Surface-List/Surface-list.component";
 import { SurfaceDetail } from "./components/surface-detail/surface-detail.component";
-import { ServerList } from "./components/server-list/server-list.component";
+import ServerList from "./components/server-list/server-list.component";
 
 class App extends Component {
   constructor() {
@@ -29,7 +29,6 @@ class App extends Component {
   render() {
     const handleChange = (event, newValue) => {
       this.setState({ value: newValue });
-      console.log(newValue);
     };
 
     const updateSelectedSur = (selectedSur) => {
@@ -81,7 +80,11 @@ class App extends Component {
                     selectSurface={this.state.selectedSur}
                   />
                 ) : (
-                  <ServerList surfaces={FilteredSurfaces} />
+                  <ServerList
+                    surfaces={FilteredSurfaces}
+                    onSelectUpdate={updateSelectedSur}
+                    selectSurface={this.state.selectedSur}
+                  />
                 )}
               </div>
             </div>

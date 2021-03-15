@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import _ from "lodash";
 import TableContainer from "@material-ui/core/TableContainer";
 import Paper from "@material-ui/core/Paper";
@@ -18,43 +18,60 @@ const StyledTableCell = withStyles((theme) => ({
     fontSize: 14,
   },
 }))(TableCell);
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-  },
-}))(TableRow);
 
-export const ServerList = (props) => {
-  const { surfaces } = props;
-  console.log(surfaces);
-  let servers = _.groupBy(surfaces, "server.ip4");
-
-  return (
-    <div>
-      <TableContainer component={Paper}>
-        <Table aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>IP 4</StyledTableCell>
-              <StyledTableCell align="left">Dns</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {Object.keys(servers).map((obj) => (
-              <StyledTableRow key={obj}>
-                <StyledTableCell component="th" scope="row">
-                  {servers[obj][0].server.ip4}
-                </StyledTableCell>
-                <StyledTableCell align="left">
-                  {servers[obj][0].server.dns}
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
-  );
-};
+export default class ServerList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: "",
+      selectedServerIP: "",
+    };
+  }
+  handleOnClick = (obj) => {
+    this.setState({ selected: obj });
+    this.props.onSelectUpdate({});
+  };
+  render() {
+    const { surfaces } = this.props;
+    let servers = _.groupBy(surfaces, "server.ip4");
+    let selectedIP = this.state.selectedServerIP;
+    console.log(this.props.selectSurface);
+    if (!_.isEmpty(this.props.selectSurface)) {
+      selectedIP = this.props.selectSurface.server.ip4;
+    } else {
+      selectedIP = "";
+    }
+    return (
+      <div>
+        <TableContainer component={Paper}>
+          <Table aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>IP 4</StyledTableCell>
+                <StyledTableCell align="left">Dns</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {Object.keys(servers).map((obj) => (
+                <TableRow
+                  key={obj}
+                  onClick={() => {
+                    this.handleOnClick(obj);
+                  }}
+                  selected={this.state.selected === obj || selectedIP === obj}
+                >
+                  <StyledTableCell component="th" scope="row">
+                    {servers[obj][0].server.ip4}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
+                    {servers[obj][0].server.dns}
+                  </StyledTableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+    );
+  }
+}

@@ -81,7 +81,7 @@ class App extends Component {
                     selectSurface={this.state.selectedSur}
                   />
                 ) : (
-                  <ServerList surfaces={this.state.surfaces} />
+                  <ServerList surfaces={FilteredSurfaces} />
                 )}
               </div>
             </div>
